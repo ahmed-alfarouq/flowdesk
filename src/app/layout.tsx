@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-
 import "./globals.css";
+
+import Navbar from "@/components/sections/Navbar";
 
 export const metadata: Metadata = {
   title: "Flowdesk",
@@ -15,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Navbar />
         <main className="container min-h-screen  flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
           {children}
         </main>
