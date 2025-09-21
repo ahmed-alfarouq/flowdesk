@@ -1,26 +1,40 @@
+@font-face {
+  font-family: "Nunito";
+  src: url("@/assets/fonts/nunito/nunito.ttf");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("@/assets/fonts/nunito/nunito-italic.ttf");
+  font-style: italic;
+}
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #605bff;
+  --color-secondary: #605bff1a;
+  --color-accent: #ff8f6be5;
+  --color-success: #3a974c;
+  --color-informative: #f29339;
+  --color-destructive: #d11a2a;
+  --color-badge-primary: #ef37ff;
+  --color-badge-secondary: #26c0e2;
+  --color-primary-foreground: #030229;
+  --color-accent-foreground: #ff8f6b;
+
+  --font-primary: Nunito, serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-[#FAFAFB] font-primary;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container {
+    @apply mx-auto px-2;
+  }
 }
