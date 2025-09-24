@@ -13,7 +13,7 @@ export const AUTH_ROUTES = [
   "/register",
   "/verify-otp",
   "/verify-email",
-  "/forgot-password",
+  "/reset-password",
   "/update-password",
 ];
 

@@ -1,4 +1,3 @@
-"use client";
 import AuthProvider from "./AuthProvider";
 
 import { authWithGoogle, authWithGithub } from "@/actions/auth/providers";

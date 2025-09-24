@@ -7,6 +7,8 @@ import AuthProviders from "./AuthProviders";
 
 import { cn } from "@/lib/utils";
 
+import { AuthContainerProps } from "@/types";
+
 const AuthContainer = ({
   title,
   showProviders = false,
@@ -35,16 +37,16 @@ const AuthContainer = ({
       <div className="mt-2 space-y-1">
         {bottomLinks.map((l, i) =>
           l.beforeText ? (
-            <Button key={`${l.text}-${i}`} variant="link" asChild>
-              <Link href={l.link}>{l.text}</Link>
-            </Button>
-          ) : (
-            <div key={`${l.text}-${i}`} className="space-x-1">
+            <div key={`${l.text}-${i}`}>
               {l.beforeText}
               <Button variant="link" asChild>
                 <Link href={l.link}>{l.text}</Link>
               </Button>
             </div>
+          ) : (
+            <Button key={`${l.text}-${i}`} variant="link" asChild>
+              <Link href={l.link}>{l.text}</Link>
+            </Button>
           )
         )}
       </div>
