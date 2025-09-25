@@ -1,0 +1,15 @@
+export const clientLogos = [
+  { src: "/logos/slack.svg", alt: "Slack", size: null },
+  { src: "/logos/asana.svg", alt: "Asana", size: null },
+  { src: "/logos/trello.svg", alt: "Trello", size: null },
+  { src: "/logos/jira.svg", alt: "Jira", size: null },
+  { src: "/logos/notion.svg", alt: "Notion", size: null },
+  { src: "/logos/figma.svg", alt: "Figma", size: null },
+  { src: "/logos/microsoft-teams.svg", alt: "Microsoft Teams", size: null },
+  { src: "/logos/zoom.svg", alt: "Zoom", size: null },
+  { src: "/logos/dropbox.svg", alt: "Dropbox", size: null },
+  { src: "/logos/adobe.svg", alt: "adobe", size: null },
+  { src: "/logos/uber.svg", alt: "uber", size: "h-12 md:h-16" },
+  { src: "/logos/aws.svg", alt: "aws", size: "h-12 md:h-18" },
+  { src: "/logos/ibm.svg", alt: "IBM", size: "h-12 md:h-16" },
+];

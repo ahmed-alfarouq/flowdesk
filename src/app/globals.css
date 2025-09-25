@@ -39,3 +39,9 @@
     @apply w-[98%] md:max-w-11/12 2xl:max-w-7xl mx-auto px-2;
   }
 }
+
+@keyframes scrollLeft {
+  to {
+    transform: translateX(calc(-100% - 96px));
+  }
+}
