@@ -6,7 +6,7 @@ const Logo = ({ className }: { className?: string }) => {
       height={60}
       viewBox="0 0 300 80"
       role="img"
-      aria-label="Desk Flow"
+      aria-label="Flow Desk"
       className={className}
     >
       <defs>
@@ -100,11 +100,11 @@ const Logo = ({ className }: { className?: string }) => {
           fontFamily="Nunito, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
           fontSize="36"
           fontWeight="700"
-          fill="#030229"
+          fill="#605bff"
           letterSpacing="-0.6"
           dominantBaseline="middle"
         >
-          Desk
+          Flow
         </text>
         <text
           x="92"
@@ -112,11 +112,11 @@ const Logo = ({ className }: { className?: string }) => {
           fontFamily="Nunito, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
           fontSize="36"
           fontWeight="700"
-          fill="#605bff"
+          fill="#030229"
           letterSpacing="-0.6"
           dominantBaseline="middle"
         >
-          Flow
+          Desk
         </text>
 
         <text
