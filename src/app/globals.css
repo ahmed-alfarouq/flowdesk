@@ -30,7 +30,7 @@
 
 @layer base {
   body {
-    @apply bg-[#FAFAFB] font-primary;
+    @apply bg-[#FAFAFB] font-primary overflow-x-hidden;
   }
 }
 
