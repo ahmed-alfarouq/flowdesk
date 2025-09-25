@@ -1,6 +1,8 @@
 import { auth } from "@/auth";
 
 import Navbar from "@/components/sections/Navbar";
+import MainBanner from "@/sections/home/MainBanner";
+
 
 export default async function Home() {
   const session = await auth();
@@ -8,7 +10,9 @@ export default async function Home() {
   return (
     <>
       <Navbar loggedin={!!session?.user} />
-      <main className="container min-h-screen  flex flex-col gap-[32px] row-start-2 items-center sm:items-start"></main>
+      <main className="container">
+        <MainBanner />
+      </main>
     </>
   );
 }
