@@ -1,5 +1,10 @@
-import { Rocket, Users, FolderKanban } from "lucide-react";
-
+import {
+  Rocket,
+  Users,
+  FolderKanban,
+  CreditCard,
+  ClipboardCheck,
+} from "lucide-react";
 
 // Home Page
 export const clientLogos = [
@@ -36,5 +41,28 @@ export const featureCards = [
     content:
       "Manage multiple clients, projects, and deliverables from one central dashboard.",
     icon: FolderKanban,
+  },
+];
+
+export const statsCards = [
+  {
+    title: "Projects Managed",
+    value: "12K+",
+    icon: FolderKanban,
+  },
+  {
+    title: "Active Teams",
+    value: "3.5K+",
+    icon: Users,
+  },
+  {
+    title: "Tasks Completed",
+    value: "850K+",
+    icon: ClipboardCheck,
+  },
+  {
+    title: "Payments Processed",
+    value: "$2.3M+",
+    icon: CreditCard,
   },
 ];

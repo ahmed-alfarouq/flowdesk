@@ -37,3 +37,9 @@ declare interface FeatureCardProps {
   title: string;
   content: string;
 }
+
+declare interface StatCardProps {
+  icon: LucideIcon;
+  title: string;
+  value: string;
+}

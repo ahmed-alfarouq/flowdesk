@@ -4,6 +4,7 @@ import Features from "@/sections/home/Features";
 import Navbar from "@/components/sections/Navbar";
 import MainBanner from "@/sections/home/MainBanner";
 import OurClients from "@/sections/home/OurClients";
+import StatsSection from "@/sections/home/StatsSection";
 import FeatureHighlight from "@/sections/home/FeatureHighlight";
 
 export default async function Home() {
@@ -17,6 +18,7 @@ export default async function Home() {
         <OurClients />
         <Features />
         <FeatureHighlight />
+        <StatsSection />
       </main>
     </>
   );
