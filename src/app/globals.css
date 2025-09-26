@@ -25,6 +25,8 @@
   --color-primary-foreground: #030229;
   --color-accent-foreground: #ff8f6b;
 
+  --radius-primary: 10px;
+
   --font-primary: Nunito, serif;
 }
 

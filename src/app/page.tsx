@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 
+import Features from "@/sections/home/Features";
 import Navbar from "@/components/sections/Navbar";
 import MainBanner from "@/sections/home/MainBanner";
 import OurClients from "@/sections/home/OurClients";
@@ -13,6 +14,7 @@ export default async function Home() {
       <main className="container space-y-18 pb-20">
         <MainBanner />
         <OurClients />
+        <Features />
       </main>
     </>
   );

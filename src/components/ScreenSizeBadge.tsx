@@ -24,7 +24,7 @@ const ScreenSizeBadge = () => {
   }, []);
 
   return (
-    <div className="absolute bottom-25 left-2 w-22 px-4 py-2 rounded-md bg-primary text-white font-bold uppercase text-center shadow-md">
+    <div className="fixed bottom-25 left-2 w-22 px-4 py-2 rounded-md bg-primary text-white font-bold uppercase text-center shadow-md">
       {size}
     </div>
   );

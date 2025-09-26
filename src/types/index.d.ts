@@ -1,3 +1,4 @@
+import { LucideIcon } from "lucide-react";
 import { FieldValues, Path, UseFormRegister } from "react-hook-form";
 
 type BottomLink = {
@@ -29,4 +30,10 @@ declare interface AuthProviderProps {
   image: string;
   text: string;
   handleClick: () => void;
+}
+
+declare interface FeatureCardProps {
+  icon: LucideIcon;
+  title: string;
+  content: string;
 }
