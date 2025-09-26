@@ -4,6 +4,7 @@ import Features from "@/sections/home/Features";
 import Navbar from "@/components/sections/Navbar";
 import MainBanner from "@/sections/home/MainBanner";
 import OurClients from "@/sections/home/OurClients";
+import FeatureHighlight from "@/sections/home/FeatureHighlight";
 
 export default async function Home() {
   const session = await auth();
@@ -15,6 +16,7 @@ export default async function Home() {
         <MainBanner />
         <OurClients />
         <Features />
+        <FeatureHighlight />
       </main>
     </>
   );
