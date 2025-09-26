@@ -11,15 +11,15 @@ const Navbar = ({ loggedin }: { loggedin: boolean }) => {
         <Logo className="sm:shrink-0 w-48" />
         <div className="flex items-center gap-3">
           {loggedin ? (
-            <Button variant="ghost" size="lg" asChild>
+            <Button variant="ghost" asChild>
               <Link href="/dashboard">Dashboard</Link>
             </Button>
           ) : (
             <>
-              <Button variant="ghost" size="lg" asChild>
+              <Button variant="ghost" asChild>
                 <Link href="/login">Login</Link>
               </Button>
-              <Button variant="accent" size="lg" asChild>
+              <Button variant="accent" asChild>
                 <Link href="/register">Sign up</Link>
               </Button>
             </>
