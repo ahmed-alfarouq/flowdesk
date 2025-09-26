@@ -2,9 +2,11 @@ import { auth } from "@/auth";
 
 import Features from "@/sections/home/Features";
 import Navbar from "@/components/sections/Navbar";
+import Footer from "@/components/sections/Footer";
 import MainBanner from "@/sections/home/MainBanner";
 import OurClients from "@/sections/home/OurClients";
 import StatsSection from "@/sections/home/StatsSection";
+import PlatformInsight from "@/sections/home/PlatformInsight";
 import FeatureHighlight from "@/sections/home/FeatureHighlight";
 
 export default async function Home() {
@@ -19,7 +21,9 @@ export default async function Home() {
         <Features />
         <FeatureHighlight />
         <StatsSection />
+        <PlatformInsight />
       </main>
+      <Footer />
     </>
   );
 }

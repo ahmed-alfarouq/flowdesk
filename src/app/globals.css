@@ -13,6 +13,7 @@
 @import "tailwindcss";
 
 @theme {
+  --color-body: #fafafb;
   --color-primary: #605bff;
   --color-secondary: #605bff1a;
   --color-third: #f7f7f8;
@@ -32,7 +33,7 @@
 
 @layer base {
   body {
-    @apply bg-[#FAFAFB] font-primary overflow-x-hidden;
+    @apply bg-body font-primary overflow-x-hidden;
   }
 }
 

@@ -43,7 +43,7 @@ const Logo = ({ className }: { className?: string }) => {
       </defs>
 
       {/* Icon without vertical translate */}
-      <g transform="translate(10,0)">
+      <g>
         <rect
           x="0"
           y="0"
@@ -93,7 +93,7 @@ const Logo = ({ className }: { className?: string }) => {
       </g>
 
       {/* Text block aligned with icon */}
-      <g transform="translate(100,50)" aria-hidden="true">
+      <g transform="translate(90,50)" aria-hidden="true">
         <text
           x="0"
           y="0"
