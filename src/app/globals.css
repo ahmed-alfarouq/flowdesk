@@ -33,7 +33,7 @@
 
 @layer base {
   body {
-    @apply bg-body font-primary overflow-x-hidden;
+    @apply bg-body font-primary min-h-svh overflow-x-hidden;
   }
 }
 

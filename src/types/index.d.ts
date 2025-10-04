@@ -21,7 +21,7 @@ declare interface InputProps<T extends FieldValues> {
 declare interface AuthContainerProps {
   title: string;
   showProviders?: boolean;
-  bottomLinks: BottomLink[];
+  bottomLinks?: BottomLink[];
   children: React.ReactNode;
   className?: string;
 }

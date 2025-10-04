@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { codec, email } from "zod";
 
 export const registerSchema = z
   .object({
@@ -45,3 +45,22 @@ export const loginSchema = z.object({
 });
 
 export type LoginSchema = z.infer<typeof loginSchema>;
+
+export const forgotPasswordSchema = z.object({
+  email: z.email(),
+  code: z.string(),
+});
+
+export type ForgotPasswordSchema = z.infer<typeof forgotPasswordSchema>;
+
+export const resetSchema = z
+  .object({
+    password: z.string().min(1, "Password is required."),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    error: "Passwords must match.",
+    path: ["confirmPassword"],
+  });
+
+export type ResetSchema = z.infer<typeof resetSchema>;
