@@ -16,6 +16,7 @@ declare interface InputProps<T extends FieldValues> {
   className?: string;
   placeholder?: string;
   register: UseFormRegister<T>;
+  disabled?: boolean;
 }
 
 declare interface AuthContainerProps {

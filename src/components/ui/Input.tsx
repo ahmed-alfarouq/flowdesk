@@ -12,6 +12,7 @@ const Input = <T extends FieldValues>({
   error,
   register,
   className,
+  disabled,
 }: InputProps<T>) => {
   return (
     <div className="flex flex-col gap-2">
@@ -26,6 +27,7 @@ const Input = <T extends FieldValues>({
           "bg-third px-2 min-h-12 rounded-lg text-primary-foreground focus:outline-0 placeholder:text-primary-foreground/70",
           className
         )}
+        disabled={disabled}
         {...register(name)}
       />
       {error && <span className="text-destructive font-medium">{error}</span>}

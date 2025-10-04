@@ -27,5 +27,6 @@ export default auth(async (req) => {
 });
 
 export const config = {
+  runtime: "nodejs",
   matcher: ["/((?!_next|static|api|.*\\..*).*)"],
 };
