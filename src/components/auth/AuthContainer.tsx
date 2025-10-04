@@ -23,7 +23,7 @@ const AuthContainer = ({
         className
       )}
     >
-      <Logo />
+      <Logo className="shrink-0" />
       <h1 className="font-semibold text-2xl mt-2">{title}</h1>
       {showProviders && (
         <>
@@ -34,22 +34,24 @@ const AuthContainer = ({
         </>
       )}
       {children}
-      <div className="mt-2 space-y-1">
-        {bottomLinks.map((l, i) =>
-          l.beforeText ? (
-            <div key={`${l.text}-${i}`}>
-              {l.beforeText}
-              <Button variant="link" asChild>
+      {bottomLinks && (
+        <div className="mt-2 space-y-1">
+          {bottomLinks.map((l, i) =>
+            l.beforeText ? (
+              <div key={`${l.text}-${i}`}>
+                {l.beforeText}
+                <Button variant="link" asChild>
+                  <Link href={l.link}>{l.text}</Link>
+                </Button>
+              </div>
+            ) : (
+              <Button key={`${l.text}-${i}`} variant="link" asChild>
                 <Link href={l.link}>{l.text}</Link>
               </Button>
-            </div>
-          ) : (
-            <Button key={`${l.text}-${i}`} variant="link" asChild>
-              <Link href={l.link}>{l.text}</Link>
-            </Button>
-          )
-        )}
-      </div>
+            )
+          )}
+        </div>
+      )}
     </main>
   );
 };
