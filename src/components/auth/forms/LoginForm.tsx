@@ -50,7 +50,7 @@ const LoginForm = () => {
       <div className="flex justify-between items-center">
         <Checkbox name="rememberMe" label="Remember me" register={register} />
         <Button variant="link">
-          <Link href="/reset-password">Reset Password?</Link>
+          <Link href="/forgot-password">Forget Password?</Link>
         </Button>
       </div>
       <Button size="lg" className="w-full">
