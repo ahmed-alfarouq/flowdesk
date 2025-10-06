@@ -7,7 +7,11 @@ type BottomLink = {
   link: string;
 };
 
-/* --- Components --- */
+/* --- Auth Components --- */
+declare interface OTPFormProps {
+  email?: string;
+}
+
 declare interface InputProps<T extends FieldValues> {
   type: string;
   label: string;
@@ -32,7 +36,7 @@ declare interface AuthProviderProps {
   text: string;
   handleClick: () => void;
 }
-
+/* --- Components --- */
 declare interface FeatureCardProps {
   icon: LucideIcon;
   title: string;
@@ -43,4 +47,12 @@ declare interface StatCardProps {
   icon: LucideIcon;
   title: string;
   value: string;
+}
+
+// Utils
+declare interface SendEmailProps {
+  to: string;
+  subject: string;
+  text?: string;
+  html?: string;
 }

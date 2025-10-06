@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { headers } from "next/headers";
 
 import Features from "@/sections/home/Features";
 import Navbar from "@/components/sections/Navbar";
@@ -10,11 +11,13 @@ import PlatformInsight from "@/sections/home/PlatformInsight";
 import FeatureHighlight from "@/sections/home/FeatureHighlight";
 
 export default async function Home() {
-  const session = await auth();
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
   return (
     <>
-      <Navbar loggedin={!!session?.user} />
+      <Navbar loggedin={!!session} />
       <main className="container space-y-18 pb-20">
         <MainBanner />
         <OurClients />
@@ -23,7 +26,7 @@ export default async function Home() {
         <StatsSection />
         <PlatformInsight />
       </main>
-      <Footer />
+      <Footer loggedin={!!session} />
     </>
   );
 }

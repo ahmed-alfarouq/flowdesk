@@ -1,7 +1,14 @@
 "use server";
+import { auth } from "@/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-import { signOut } from "@/auth";
+const logout = async () => {
+  await auth.api.signOut({
+    headers: await headers(),
+  });
 
-const logout = async () => await signOut();
+  redirect("/login");
+};
 
 export default logout;

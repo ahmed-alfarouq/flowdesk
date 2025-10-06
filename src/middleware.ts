@@ -1,14 +1,10 @@
-import NextAuth from "next-auth";
-import { NextResponse } from "next/server";
-
-import authConfig from "./auth.config";
+import { getSessionCookie } from "better-auth/cookies";
+import { NextRequest, NextResponse } from "next/server";
 
 import { AUTH_ROUTES, DEFAULT_LOGIN_REDIRECT, PUBLIC_ROUTES } from "./routes";
 
-const { auth } = NextAuth(authConfig);
-
-export default auth(async (req) => {
-  const session = await auth();
+const middleware = async (req: NextRequest) => {
+  const session = getSessionCookie(req);
   const { pathname } = req.nextUrl;
   const response = NextResponse.next();
 
@@ -23,10 +19,19 @@ export default auth(async (req) => {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
+  // Clearing cookies after successfull login
+  const emailCookie = req.cookies.get("pending_email");
+  const otpCookie = req.cookies.get("otp_sent");
+
+  if (emailCookie) response.cookies.delete("pending_email");
+  if (otpCookie) response.cookies.delete("otp_sent");
+
   return response;
-});
+};
 
 export const config = {
   runtime: "nodejs",
   matcher: ["/((?!_next|static|api|.*\\..*).*)"],
 };
+
+export default middleware;

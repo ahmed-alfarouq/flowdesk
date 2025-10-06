@@ -28,6 +28,7 @@ export type RegisterSchema = z.infer<typeof registerSchema>;
 export const loginSchema = z.object({
   email: z.email(),
   password: z.string().min(1, "Password is required!"),
+  rememberMe: z.boolean().optional(),
 });
 
 export type LoginSchema = z.infer<typeof loginSchema>;
@@ -50,3 +51,9 @@ export const resetSchema = z
   });
 
 export type ResetSchema = z.infer<typeof resetSchema>;
+
+export const otpSchema = z.object({
+  otp: z.string().length(6, "Code must be 6 digits."),
+});
+
+export type OTPSchema = z.infer<typeof otpSchema>;

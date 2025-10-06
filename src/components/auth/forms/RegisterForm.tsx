@@ -1,6 +1,7 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+
+import { signUp } from "@/auth-client";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,15 +12,9 @@ import { Button } from "@/components/ui/Button";
 
 import { RegisterSchema, registerSchema } from "@/schemas/auth";
 
-import registerNewUser from "@/actions/auth/register";
-
-import login from "@/actions/auth/login";
-
 const RegisterForm = () => {
   const [isPending, startTransition] = useTransition();
   const [formError, setFormError] = useState<undefined | string>();
-
-  const router = useRouter();
 
   const {
     handleSubmit,
@@ -30,25 +25,16 @@ const RegisterForm = () => {
   });
 
   const onSubmit = (data: RegisterSchema) => {
+    setFormError("");
     startTransition(async () => {
-      setFormError("");
-      const response = await registerNewUser(data);
-      if (!response.success) {
-        setFormError(response?.message);
-        return;
-      }
-
-      const res = await login({
+      const { error } = await signUp.email({
+        name: data.fullName,
         email: data.email,
         password: data.password,
       });
 
-      if (res?.error) {
-        setFormError(res.error);
-      }
-
-      if (res.success) {
-        router.push(res.redirectTo);
+      if (error) {
+        setFormError(error.message);
       }
     });
   };

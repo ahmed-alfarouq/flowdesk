@@ -1,6 +1,5 @@
+"use client"; /// Don't forget to remove
 import AuthProvider from "./AuthProvider";
-
-import { authWithGoogle, authWithGithub } from "@/actions/auth/providers";
 
 const AuthProviders = () => {
   return (
@@ -8,13 +7,13 @@ const AuthProviders = () => {
       <AuthProvider
         image="/images/google.svg"
         text="Google"
-        handleClick={authWithGoogle}
+        handleClick={() => {}}
       />
 
       <AuthProvider
         image="/images/github.svg"
         text="Github"
-        handleClick={authWithGithub}
+        handleClick={() => {}}
       />
     </div>
   );

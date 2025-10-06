@@ -1,24 +1,28 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useState, useTransition } from "react";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { signIn, twoFactor } from "@/auth-client";
+
 import Input from "@/components/ui/Input";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
+import Checkbox from "@/components/ui/Checkbox";
 
-import login from "@/actions/auth/login";
+import { setEmailCookie } from "@/actions/auth/emailCookie";
+import { setOtpTrackingCookie } from "@/actions/auth/otpCookie";
 
 import { LoginSchema, loginSchema } from "@/schemas/auth";
+
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
 const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
   const [formError, setFormError] = useState<undefined | string>();
-
-  const router = useRouter();
 
   const {
     handleSubmit,
@@ -27,23 +31,42 @@ const LoginForm = () => {
     reset,
   } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      rememberMe: false,
+    },
   });
 
-  const onSubmit = (data: LoginSchema) => {
+  const onSubmit = ({ email, password, rememberMe }: LoginSchema) => {
     setFormError("");
     startTransition(async () => {
-      try {
-        const res = await login(data);
-        if (res?.error) {
-          reset();
-          setFormError(res.error);
-        }
+      const { error } = await signIn.email(
+        {
+          email,
+          password,
+          rememberMe,
+          callbackURL: DEFAULT_LOGIN_REDIRECT,
+        },
+        {
+          async onSuccess(ctx) {
+            if (ctx.data.twoFactorRedirect) {
+              const { data, error } = await twoFactor.sendOtp();
+              if (data) {
+                await setOtpTrackingCookie();
+                return redirect("/verify-otp");
+              }
 
-        if (res.success) {
-          router.push(res.redirectTo);
+              setFormError(error.message);
+            }
+          },
         }
-      } catch (error) {
-        setFormError((error as Error).message);
+      );
+      if (error) {
+        if (error.message === "Email not verified") {
+          await setEmailCookie(email);
+          return redirect("/verify-email");
+        }
+        setFormError(error.message);
+        reset({ password: "" });
       }
     });
   };
@@ -70,7 +93,8 @@ const LoginForm = () => {
         error={errors.password?.message}
       />
       <Alert message={formError} variant="danger" />
-      <div className="w-full flex justify-end">
+      <div className="w-full flex justify-between items-center">
+        <Checkbox name="rememberMe" label="Remember me" register={register} />
         <Button variant="link">
           <Link href="/forgot-password">Forgot Password?</Link>
         </Button>

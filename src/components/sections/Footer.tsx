@@ -1,14 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { auth } from "@/auth";
-
 import Logo from "../icons/Logo";
 
 import { Button } from "../ui/Button";
 
-const Footer = async () => {
-  const session = await auth();
+const Footer = async ({ loggedin }: { loggedin: boolean }) => {
   return (
     <footer className="bg-white shadow-xs text-primary-foreground py-12">
       <div className="container">
@@ -62,7 +59,7 @@ const Footer = async () => {
           </div>
 
           <ul className="flex flex-col">
-            {session ? (
+            {loggedin ? (
               <li>
                 <Button variant="link" asChild>
                   <Link href="/dashboard">Dashboard</Link>
