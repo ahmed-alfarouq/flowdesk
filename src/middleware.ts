@@ -18,13 +18,14 @@ const middleware = async (req: NextRequest) => {
   if (!isPublicRoute && !isAuthRoute && !session) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
+  if (session) {
+    // Clearing cookies after successfull login
+    const emailCookie = req.cookies.get("pending_email");
+    const otpCookie = req.cookies.get("otp_sent");
 
-  // Clearing cookies after successfull login
-  const emailCookie = req.cookies.get("pending_email");
-  const otpCookie = req.cookies.get("otp_sent");
-
-  if (emailCookie) response.cookies.delete("pending_email");
-  if (otpCookie) response.cookies.delete("otp_sent");
+    if (emailCookie) response.cookies.delete("pending_email");
+    if (otpCookie) response.cookies.delete("otp_sent");
+  }
 
   return response;
 };
