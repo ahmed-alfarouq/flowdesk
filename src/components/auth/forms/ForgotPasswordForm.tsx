@@ -1,17 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
-
 import { useForm } from "react-hook-form";
+import { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { requestPasswordReset } from "@/auth-client";
+
 import Input from "@/components/ui/Input";
+import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 
 import { ForgotPasswordSchema, forgotPasswordSchema } from "@/schemas/auth";
 
 const ForgotPasswordForm = () => {
-  const [stage, setStage] = useState("email");
-  const [email, setEmail] = useState<null | string>(null);
+  const [isPending, startTransition] = useTransition();
+  const [formError, setFormError] = useState<undefined | string>();
+  const [formSuccess, setFormSuccess] = useState<undefined | string>();
 
   const {
     handleSubmit,
@@ -21,31 +24,20 @@ const ForgotPasswordForm = () => {
     resolver: zodResolver(forgotPasswordSchema),
   });
 
-  const onSubmit = (data: ForgotPasswordSchema) => {
-    if (data.code) {
-      if (email) {
-        // Which means user refreshed the page
-        console.log(email);
+  const onSubmit = ({ email }: ForgotPasswordSchema) => {
+    startTransition(async () => {
+      const { data, error } = await requestPasswordReset({
+        email,
+        redirectTo: "/reset-password",
+      });
+      if (error) {
+        return setFormError(error.message);
       }
-      console.log("code: ", data.code);
-      return;
-    }
-
-    console.log("email: ", data.email);
-    localStorage.setItem("email", data.email);
-    localStorage.setItem("reset-password-stage", "code");
+      setFormSuccess(data.message);
+    });
   };
 
-  useEffect(() => {
-    const currentStage = localStorage.getItem("reset-password-stage");
-    const currentEmail = localStorage.getItem("email");
-
-    if (!currentStage) return;
-    setStage(currentStage);
-    setEmail(currentEmail);
-  }, []);
-
-  return stage === "email" ? (
+  return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-3 w-full"
@@ -57,26 +49,16 @@ const ForgotPasswordForm = () => {
         placeholder="ahmed.omar.alfarouq@gmail.com"
         register={register}
         error={errors.email?.message}
+        disabled={!!formSuccess}
       />
-      <Button size="lg" className="w-full">
-        Send Code
-      </Button>
-    </form>
-  ) : (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-3 w-full"
-    >
-      <Input
-        label="Code"
-        type="text"
-        name="code"
-        placeholder="6 digits"
-        register={register}
-        error={errors.code?.message}
-      />
-      <Button size="lg" className="w-full">
-        Submit Code
+      <Alert message={formSuccess} variant="success" />
+      <Alert message={formError} variant="danger" />
+      <Button
+        size="lg"
+        className="w-full"
+        disabled={isPending || !!formSuccess}
+      >
+        {isPending ? "Seding Email..." : "Send Email"}
       </Button>
     </form>
   );

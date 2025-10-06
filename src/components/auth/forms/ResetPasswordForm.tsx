@@ -1,26 +1,42 @@
 "use client";
-
 import { useForm } from "react-hook-form";
+import { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { resetPassword } from "@/auth-client";
+
 import Input from "@/components/ui/Input";
+import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 
-import { ResetSchema, resetSchema } from "@/schemas/auth";
+import { ResetPasswordSchema, resetPasswordSchema } from "@/schemas/auth";
 
-const ResetPasswordForm = () => {
+const ResetPasswordForm = ({ token }: { token: string }) => {
+  const [isPending, startTransition] = useTransition();
+  const [formError, setFormError] = useState<undefined | string>();
+  const [formSuccess, setFormSuccess] = useState<undefined | string>();
+
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<ResetSchema>({
-    resolver: zodResolver(resetSchema),
+  } = useForm<ResetPasswordSchema>({
+    resolver: zodResolver(resetPasswordSchema),
   });
 
-  const onSubmit = (data: ResetSchema) => {
-    console.log(data);
-  };
+  const onSubmit = ({ password }: ResetPasswordSchema) => {
+    startTransition(async () => {
+      const { error } = await resetPassword({
+        token,
+        newPassword: password,
+      });
+      if (error) {
+        return setFormError(error.message);
+      }
 
+      setFormSuccess("Password updated successfully. Try to login now!");
+    });
+  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -33,6 +49,7 @@ const ResetPasswordForm = () => {
         placeholder="*******"
         register={register}
         error={errors.password?.message}
+        disabled={isPending || !!formSuccess}
       />
       <Input
         label="Confirm New Password"
@@ -41,10 +58,19 @@ const ResetPasswordForm = () => {
         placeholder="*******"
         register={register}
         error={errors.confirmPassword?.message}
+        disabled={isPending || !!formSuccess}
       />
-      <Button size="lg" className="w-full">
-        Reset Password
+      <Alert message={formSuccess} variant="success" />
+      <Alert message={formError} variant="danger" />
+      <Button
+        size="lg"
+        className="w-full"
+        disabled={isPending || !!formSuccess}
+      >
+        {isPending ? "Checking token..." : "Reset Password"}
       </Button>
+
+      <Button variant="link">Go to login</Button>
     </form>
   );
 };

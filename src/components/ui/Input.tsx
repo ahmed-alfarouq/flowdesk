@@ -24,7 +24,7 @@ const Input = <T extends FieldValues>({
         id={name}
         placeholder={placeholder}
         className={cn(
-          "bg-third px-2 min-h-12 rounded-lg text-primary-foreground focus:outline-0 placeholder:text-primary-foreground/70",
+          "bg-third px-2 min-h-12 rounded-lg text-primary-foreground focus:outline-0 placeholder:text-primary-foreground/70 disabled:opacity-50",
           className
         )}
         disabled={disabled}

@@ -35,14 +35,19 @@ export type LoginSchema = z.infer<typeof loginSchema>;
 
 export const forgotPasswordSchema = z.object({
   email: z.email(),
-  code: z.string(),
 });
 
 export type ForgotPasswordSchema = z.infer<typeof forgotPasswordSchema>;
 
-export const resetSchema = z
+export const resetPasswordSchema = z
   .object({
-    password: z.string().min(1, "Password is required."),
+    password: z
+    .string()
+    .min(1, "Password is required.")
+    .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/, {
+      error:
+        "Password must be at least 8 characters long and include one uppercase letter, one number, and one special character.",
+    }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -50,7 +55,7 @@ export const resetSchema = z
     path: ["confirmPassword"],
   });
 
-export type ResetSchema = z.infer<typeof resetSchema>;
+export type ResetPasswordSchema = z.infer<typeof resetPasswordSchema>;
 
 export const otpSchema = z.object({
   otp: z.string().length(6, "Code must be 6 digits."),
