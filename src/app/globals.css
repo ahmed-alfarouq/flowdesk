@@ -13,7 +13,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-body: #fafafb;
+  --color-body: #f2f2f2;
   --color-primary: #605bff;
   --color-secondary: #605bff1a;
   --color-third: #f7f7f8;
@@ -41,8 +41,11 @@
   .container {
     @apply w-[98%] md:max-w-11/12 2xl:max-w-7xl mx-auto px-2;
   }
-}
 
+  .before-shadow {
+    @apply before:absolute before:top-0 before:left-0 before:bottom-0 before:w-2/12 before:opacity-30 before:bg-gradient-to-r before:from-[#ACA9FF] before:to-[#aca9ff00];
+  }
+}
 @keyframes scrollLeft {
   to {
     transform: translateX(calc(-100% - 96px));

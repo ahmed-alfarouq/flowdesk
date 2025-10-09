@@ -4,8 +4,9 @@ import { emailOTPClient, twoFactorClient } from "better-auth/client/plugins";
 export const {
   signIn,
   signUp,
-  requestPasswordReset,
+  signOut,
   resetPassword,
+  requestPasswordReset,
   useSession,
   emailOtp,
   twoFactor,

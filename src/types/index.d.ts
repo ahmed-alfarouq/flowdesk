@@ -1,4 +1,5 @@
 import { LucideIcon } from "lucide-react";
+import { Ref, SyntheticEvent } from "react";
 import { FieldValues, Path, UseFormRegister } from "react-hook-form";
 
 type BottomLink = {
@@ -36,7 +37,17 @@ declare interface AuthProviderProps {
   text: string;
   handleClick: () => void;
 }
+
 /* --- Components --- */
+declare interface NavLinkProps {
+  href: string;
+  text: string;
+  icon: LucideIcon;
+  isActive: boolean;
+  className?: string;
+  ref: RefObject<HTMLDivElement | void | null>;
+}
+
 declare interface FeatureCardProps {
   icon: LucideIcon;
   title: string;

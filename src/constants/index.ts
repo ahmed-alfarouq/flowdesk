@@ -1,10 +1,21 @@
 import {
-  Rocket,
   Users,
-  FolderKanban,
+  Rocket,
+  BrainCog,
   CreditCard,
+  UserRoundCog,
+  FolderKanban,
   ClipboardCheck,
+  LayoutDashboard,
+  MessageCircleMore,
 } from "lucide-react";
+
+export const mainSidebarLinks = [
+  { link: "/dashboard", text: "Dashboard", icon: LayoutDashboard },
+  { link: "/brain", text: "Brain", icon: BrainCog },
+  { link: "/messages", text: "Messages", icon: MessageCircleMore },
+  { link: "/settings", text: "Settings", icon: UserRoundCog },
+];
 
 // Home Page
 export const clientLogos = [
