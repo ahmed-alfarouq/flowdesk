@@ -70,16 +70,14 @@ const Sidebar = () => {
               <Button
                 size="icon"
                 variant="link"
+                aria-label="logout"
                 onClick={handleLogout}
                 className="group relative text-primary-foreground/50 hover:text-primary size-full"
               >
-                <LogOut className="size-6 sm:size-7 lg:size-6" />
-                <span
-                  id="toolbar-logout"
-                  className="opacity-0 group-hover:opacity-100 select-none absolute -top-7 left-1/2 -translate-x-1/2 bg-primary text-white text-sm rounded-md p-3 py-1 before:absolute before:-bottom-2 before:left-1/2 before:-translate-x-1/2 before:border-4 before:border-primary before:border-b-transparent before:border-r-transparent before:border-l-transparent transition-all duration-150"
-                >
-                  Logout
-                </span>
+                <LogOut
+                  className="size-6 sm:size-7 lg:size-6"
+                  aria-hidden="true"
+                />
               </Button>
             </li>
           </ul>

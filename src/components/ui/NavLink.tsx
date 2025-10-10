@@ -25,7 +25,7 @@ const NavLink = ({
       )}
       aria-label={text}
     >
-      <Icon className="size-6 sm:size-7 lg:size-6" />
+      <Icon className="size-6 sm:size-7 lg:size-6" aria-hidden="true" />
       <span className="hidden lg:block">{text}</span>
     </Link>
   );
