@@ -13,8 +13,8 @@ const useActiveLinkIndicator = (
       );
 
       if (activeLink && underElRef.current) {
-        const { x } = activeLink.getBoundingClientRect();
-        underElRef.current.style.setProperty("--underline-x", `${x}px`);
+        const x = activeLink.offsetLeft;
+        underElRef.current.style.setProperty("--sidebar-nav-indicator-x", `${x}px`);
       }
     };
 
