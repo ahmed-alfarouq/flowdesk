@@ -46,14 +46,15 @@ const Sidebar = () => {
           aria-label="Main menu"
           className="relative w-full flex lg:block"
         >
+          <span
+            ref={underElRef}
+            className="lg:hidden absolute -left-2 -top-7 sm:-left-1.5 sm:-top-6.5 bg-body p-4 rounded-full size-18 transition-all duration-300"
+            style={{
+              transform: "translateX(var(--sidebar-nav-indicator-x, 0))",
+            }}
+            aria-hidden="true"
+          ></span>
           <ul className="flex gap-5 sm:gap-12 lg:gap-4 lg:flex-col mx-auto">
-            <li
-              ref={underElRef}
-              className="lg:hidden absolute -left-2 -top-7 sm:-left-1.5 sm:-top-6.5 bg-body p-4 rounded-full size-18 transition-all duration-300"
-              style={{
-                transform: "translateX(var(--underline-x, 0))",
-              }}
-            ></li>
             {mainSidebarLinks.map((l, i) => (
               <li key={l.text}>
                 <NavLink
