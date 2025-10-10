@@ -49,20 +49,16 @@ const LoginForm = () => {
         {
           async onSuccess(ctx) {
             if (ctx.data.twoFactorRedirect) {
-              const { data, error } = await twoFactor.sendOtp();
-              if (data) {
-                await setOtpTrackingCookie();
-                return redirect("/verify-otp");
-              }
-
-              setFormError(error.message);
+              twoFactor.sendOtp();
+              setOtpTrackingCookie();
+              return redirect("/verify-otp");
             }
           },
         }
       );
       if (error) {
         if (error.message === "Email not verified") {
-          await setEmailCookie(email);
+          setEmailCookie(email);
           return redirect("/verify-email");
         }
         setFormError(error.message);
