@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useTransition } from "react";
 import { signOut, useSession } from "@/auth-client";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -18,18 +18,22 @@ const Sidebar = () => {
   const path = usePathname();
   const session = useSession();
 
+  const [isPending, startTransition] = useTransition();
+
   const navLinksRef = useRef<HTMLAnchorElement[]>([]);
   const underElRef = useRef<HTMLLIElement | null>(null);
 
   useActiveLinkIndicator(path, underElRef, navLinksRef);
 
-  const handleLogout = async () => {
-    await signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          router.push("/login");
+  const handleLogout = () => {
+    startTransition(async () => {
+      await signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.push("/login");
+          },
         },
-      },
+      });
     });
   };
 
@@ -71,6 +75,7 @@ const Sidebar = () => {
                 size="icon"
                 variant="link"
                 aria-label="logout"
+                disabled={isPending}
                 onClick={handleLogout}
                 className="group relative text-primary-foreground/50 hover:text-primary size-full"
               >
